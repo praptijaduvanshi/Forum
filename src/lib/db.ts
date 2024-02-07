@@ -6,7 +6,7 @@ declare global {
   var cachedPrisma: PrismaClient
 }
 
-
+//Ensures on local development, no multiple Prisma clients
 let prisma: PrismaClient
 if (process.env.NODE_ENV === 'production') {
   prisma = new PrismaClient()

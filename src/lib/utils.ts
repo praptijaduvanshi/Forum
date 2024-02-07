@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge'
 import { formatDistanceToNowStrict } from 'date-fns'
 import locale from 'date-fns/locale/en-US'
 
+// i.e my-2 and mx-2 become m-2 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
