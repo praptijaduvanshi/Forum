@@ -5,6 +5,9 @@ import {Inter} from 'next/font/google'
 
 
 export const metadata = {
+  icons: {
+    icon: '/choco.ico',
+  },
   title: 'Dunkit',
   description: 'A Reddit clone built with Next.js and TypeScript.',
 }
