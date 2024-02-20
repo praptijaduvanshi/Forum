@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Icons } from "./Icons"
+import { buttonVariants } from "./ui/Button"
 
 const Navbar = () => {
 
@@ -13,6 +14,9 @@ const Navbar = () => {
             </Link>
 
             {/*Add a search bar*/}
+
+            {/*Sign-in button for authentication, Link component with classname buttonVariants allows to pass all Button-like properties */}
+            <Link href='/sign-in' className={buttonVariants()}>Sign In</Link>
 
         </div>
     </div>
