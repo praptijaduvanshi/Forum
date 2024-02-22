@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Icons } from "./Icons"
+import UserAuthForm from "./UserAuthForm"
 
 //Sign-In is a server component, hence can't have interactivity. 
 //UserAuthForm is used as the client component.
@@ -14,6 +15,7 @@ const SignIn = ({}) => {
       <p className="text-sm max-w-xs mx-auto">By continuing, you are setting up a Dunkit account and agree to our User Agreement and Privacy Policy.</p>
 
       {/* Sign-In form */}
+      <UserAuthForm />
 
 
       <p className="px-8 text-center text-sm text-zinc-700">
