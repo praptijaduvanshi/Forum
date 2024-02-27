@@ -11,6 +11,7 @@ import { Icons } from './Icons'
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
+  //Whether user is logging-in
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const {toast} = useToast()
 
@@ -18,7 +19,6 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
     setIsLoading(true)
 
     try {
-      throw new Error()
       await signIn('google')
     } catch (error) {
       toast({
