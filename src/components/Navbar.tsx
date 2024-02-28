@@ -1,8 +1,12 @@
 import Link from "next/link"
-import { Icons } from "./Icons"
-import { buttonVariants } from "./ui/Button"
+import { Icons } from "@/components/Icons"
+import { buttonVariants } from "@/components/ui/Button"
+import { getAuthSession } from "@/lib/auth"
+import UserAccountNav from "@/components/UserAccountNav"
 
-const Navbar = () => {
+const Navbar = async() => {
+
+    const session= await getAuthSession()
 
     return (
     <div className="fixed top-0 inset-x-0 h-fit bg-zinc-100 border-b border-zinc-300 z-[10] py-2">
@@ -16,7 +20,13 @@ const Navbar = () => {
             {/*Add a search bar*/}
 
             {/*Sign-in button for authentication, Link component with classname buttonVariants allows to pass all Button-like properties */}
-            <Link href='/sign-in' className={buttonVariants()}>Sign In</Link>
+
+            {session ? (
+                <UserAccountNav user={session.user}/>
+            ) : (
+                <Link href='/sign-in' className={buttonVariants()}>Sign In</Link>
+            )}
+            
 
         </div>
     </div>
