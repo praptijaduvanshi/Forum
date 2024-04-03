@@ -8,10 +8,13 @@ import { useState } from "react"
 import { useMutation } from '@tanstack/react-query'
 import axios, { AxiosError } from 'axios'
 import { CreateSubredditPayload } from "@/lib/validators/subreddit"
+import { useCustomToasts } from '@/hooks/use-custom-toasts'
+import { toast } from "@/hooks/use-toast"
 
 const Page = () => {
-    const [input, setInput] = useState<string>('')
     const router = useRouter()
+    const [input, setInput] = useState<string>('')
+    const { loginToast } = useCustomToasts()
 
     const {mutate: createCommunity, isLoading} = useMutation({
         //Any function the handles data fetching, essentially posting 'name'
@@ -21,7 +24,38 @@ const Page = () => {
             }
             const { data } = await axios.post('/api/subreddit', payload)
             return data as string
-            },
+        },
+        onError:(err) => {
+            if (err instanceof AxiosError) {
+                if(err.response?.status === 409) {
+                    return toast ({
+                        title: 'Subreddit already exists.',
+                        description: 'Please choose a different name.',
+                        variant: 'destructive',
+                    })
+                }
+                if(err.response?.status === 422) {
+                    return toast ({
+                        title: 'Invalid subreddit name.',
+                        description: 'Please choose a name with 3 to 21 letters.',
+                        variant: 'destructive',
+                    })
+                }
+                if(err.response?.status === 401) {
+                    return loginToast()
+                }
+            }
+
+            toast({
+                title: 'There was an error.',
+                description: 'Could not create subreddit.',
+                variant: 'destructive',
+            })
+        },
+
+        onSuccess: (data) => {
+            router.push(`/r/${data}`)
+        },
     })
 
     return (

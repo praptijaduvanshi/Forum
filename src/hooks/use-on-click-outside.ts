@@ -1,6 +1,5 @@
 import { RefObject, useEffect } from 'react'
 
-//From useHooks
 type Event = MouseEvent | TouchEvent
 
 export const useOnClickOutside = <T extends HTMLElement = HTMLElement>(
